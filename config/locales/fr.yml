@@ -1,0 +1,11 @@
+fr:
+  user_mailer:
+    welcome_email:
+      subject: "Bienvenue sur Language App!"
+      greeting: "Bonjour %{name},"
+      body:
+        line1: "Vous vous êtes inscrit avec succès à Language App."
+        line2: "Votre adresse e-mail est : %{email}"
+        line3: "Votre nom d'utilisateur est : %{username}"
+        line4: "La langue que vous avez sélectionnée est : %{language}"
+        closing: "Merci de nous avoir rejoints et passez une excellente journée!"

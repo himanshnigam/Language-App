@@ -1,0 +1,6 @@
+<%= I18n.t('user_mailer.welcome_email.greeting', name: @user.name) %>
+<%= I18n.t('user_mailer.welcome_email.body.line1') %>
+<%= I18n.t('user_mailer.welcome_email.body.line2', email: @user.email) %>
+<%= I18n.t('user_mailer.welcome_email.body.line3', username: @user.username) %>
+<%= I18n.t('user_mailer.welcome_email.body.line4', language: @user.language) %>
+<%= I18n.t('user_mailer.welcome_email.body.closing') %>
