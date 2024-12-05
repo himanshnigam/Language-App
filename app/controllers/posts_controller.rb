@@ -1,9 +1,17 @@
 class PostsController < ApplicationController
+  include Pagy::Backend
+
   before_action :set_post, only: [:show, :update, :destroy]
 
   def index
-    posts = Post.all
-    render json: posts, status: :ok
+    @q = Post.ransack(params[:q])
+    @pagy, @posts = pagy(@q.result(distinct: true).order(created_at: :desc))
+
+    render json: {
+    pagination: pagy_metadata(@pagy),
+    posts: ActiveModel::Serializer::CollectionSerializer.new(@posts, each_serializer: PostSerializer),
+    current_posts_count: @posts.size
+  }, status: :ok
   end
 
   def show
@@ -11,13 +19,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = Post.new(post_params)
+    @post = Post.new(post_params)
     post.user = @current_user
-    if post.save
-      render json: post, status: :created
-    else
-      render json: { errors: post.errors.full_messages }, status: :unprocessable_entity
-    end
+      if post.save
+        render json: @post, status: :created
+      else
+        render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+      end
   end
 
   def update
