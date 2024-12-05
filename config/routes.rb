@@ -1,21 +1,14 @@
 Rails.application.routes.draw do
-  get 'posts/index'
-  get 'posts/show'
-  get 'posts/new'
-  get 'posts/create'
-  get 'posts/edit'
-  get 'posts/update'
-  get 'posts/destroy'
-  get 'categories/index'
-  get 'categories/show'
-  get 'categories/new'
-  get 'categories/create'
-  get 'categories/edit'
-  get 'categories/update'
-  get 'categories/destroy'
+  root "posts#index"
 
   resources :posts
+
+  resources :categories
+
+  resources :users
+  
   post '/auth/signup', to: 'authentication#signup'
+  post '/auth/login', to: 'authentication#login'
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
