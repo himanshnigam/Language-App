@@ -2,8 +2,8 @@ class Post < ApplicationRecord
   belongs_to :category
   belongs_to :user
 
-  validates :title, :body, presence: true
-
+  validates :title, presence: true
+  validates :body, presence: true
   def self.ransackable_attributes(auth_object = nil)
     ["body", "category_id", "created_at", "id", "id_value", "title", "updated_at", "user_id"]
   end
