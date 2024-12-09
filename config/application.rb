@@ -17,7 +17,6 @@ module LanguageApp
     config.autoload_lib(ignore: %w(assets tasks))
 
     I18n.available_locales = [:en, :es, :fr, :ar, :hi]
-
     I18n.default_locale = :en
 
     # Configuration for the application, engines, and railties goes here.
@@ -32,5 +31,8 @@ module LanguageApp
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore, key: '_language_app_session'
   end
 end
