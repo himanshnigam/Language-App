@@ -34,8 +34,9 @@ class CategoriesController < ApplicationController
   private
 
   def set_category
-   @category = Category.find(params[:id])
-   render json: { error: "Category not found" }, status: :not_found
+    @category = Category.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: "Category not found" }, status: :not_found
   end
 
   def category_params

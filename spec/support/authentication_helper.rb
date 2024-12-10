@@ -1,9 +1,12 @@
 # spec/support/authentication_helper.rb
 # module AuthenticationHelper
-#     include JsonWebToken  # This will allow access to jwt_encode
-  
-#     def sign_in(user)
-#       token = jwt_encode(user_id: user.id)  # This should work now
-#       request.headers["Authorization"] = "Bearer #{token}"
-#     end
+#   def generate_jwt_token(user)
+#     payload = { user_id: user.id, exp: 7.days.from_now.to_i }
+#     JWT.encode(payload, Rails.application.secret_key_base)
 #   end
+
+#   def auth_headers(user)
+#     token = generate_jwt_token(user)
+#     { 'Authorization': "Bearer #{token}" }
+#   end
+# end

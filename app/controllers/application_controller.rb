@@ -5,11 +5,30 @@ class ApplicationController < ActionController::API
     before_action :set_locale
 
     private
+    # def authenticate_request
+    #     header = request.headers["Authorization"]
+    #     header = header.split(" ").last if header
+    #     decoded = jwt_decode(header)
+    #     @current_user = User.find(decoded[:user_id])
+    # end
+
     def authenticate_request
         header = request.headers["Authorization"]
-        header = header.split(" ").last if header
-        decoded = jwt_decode(header)
-        @current_user = User.find(decoded[:user_id])
+        
+        # If no header or invalid token format
+        if header.nil? || !header.start_with?('Bearer ')
+          render json: { error: 'Unauthorized' }, status: :unauthorized
+          return
+        end
+    
+        begin
+          # Remove 'Bearer ' prefix and decode
+          token = header.split(" ").last
+          decoded = jwt_decode(token)
+          @current_user = User.find(decoded[:user_id])
+        rescue
+          render json: { error: 'Unauthorized' }, status: :unauthorized
+        end
     end
 
     def set_locale

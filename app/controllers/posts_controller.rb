@@ -8,10 +8,11 @@ class PostsController < ApplicationController
     @pagy, @posts = pagy(@q.result(distinct: true).order(created_at: :desc))
 
     render json: {
-    pagination: pagy_metadata(@pagy),
-    posts: ActiveModel::Serializer::CollectionSerializer.new(@posts, each_serializer: PostSerializer),
-    current_posts_count: @posts.size
-  }, status: :ok
+      pagination: pagy_metadata(@pagy),
+      posts: ActiveModel::Serializer::CollectionSerializer.new(@posts, each_serializer: PostSerializer),
+      current_posts_count: @posts.size
+    }, status: :ok
+    debugger
   end
 
   def show
@@ -20,12 +21,12 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    post.user = @current_user
-      if post.save
-        render json: @post, status: :created
-      else
-        render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
-      end
+    @post.user = @current_user
+    if @post.save
+      render json: @post, status: :created
+    else
+      render json: { errors: @post.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def update
@@ -44,6 +45,7 @@ class PostsController < ApplicationController
 
   def set_post
     @post = Post.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
     render json: { error: "Post not found" }, status: :not_found
   end
 
