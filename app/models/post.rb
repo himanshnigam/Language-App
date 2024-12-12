@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  self.per_page = 3
+  
   belongs_to :category
   belongs_to :user
 

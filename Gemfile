@@ -25,7 +25,9 @@ gem "bcrypt", "~> 3.1.7"
 
 gem 'jwt'
 
-gem 'pagy', '~> 9.3' # omit patch digit
+# gem 'pagy', '~> 9.3' # omit patch digit
+
+gem 'will_paginate', '~> 4.0'
 
 gem 'ransack'
 

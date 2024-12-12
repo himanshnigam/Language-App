@@ -161,7 +161,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.8-x86_64-linux)
       racc (~> 1.4)
-    pagy (9.3.2)
     psych (5.2.1)
       date
       stringio
@@ -268,6 +267,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (4.0.1)
     zeitwerk (2.7.1)
 
 PLATFORMS
@@ -294,7 +294,6 @@ DEPENDENCIES
   factory_bot_rails
   faker
   jwt
-  pagy (~> 9.3)
   puma (>= 5.0)
   rails (~> 7.1.5)
   rails-controller-testing
@@ -304,6 +303,7 @@ DEPENDENCIES
   sidekiq-scheduler
   sqlite3 (>= 1.4)
   tzinfo-data
+  will_paginate (~> 4.0)
 
 RUBY VERSION
    ruby 3.2.4p170
